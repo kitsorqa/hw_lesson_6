@@ -28,12 +28,14 @@ def test_dark_theme_by_time_and_user_choice():
     #  но учтите что темная тема может быть включена вручную
 
     is_dark_theme = None
+
     if dark_theme_enabled_by_user:
         is_dark_theme = True
-    elif dark_theme_enabled_by_user is None:
+    elif dark_theme_enabled_by_user is False:
         is_dark_theme = False
     else:
         is_dark_theme = True if (22 <= current_time.hour or current_time.hour < 6) else False
+
     assert is_dark_theme is True
 
 
@@ -86,8 +88,9 @@ def test_readable_function():
 
 
 def print_readable_func_info(func, *args):
-    func_name = func.__name__.replace('_', " ").title()
-    return f"{func_name} [{", ".join(args)}]"
+    func_name = f'{func.__name__.replace('_', " ").title()} [{", ".join(args)}]'
+    print(func_name)
+    return func_name
 
 def open_browser(browser_name):
     actual_result = print_readable_func_info(open_browser, browser_name)
